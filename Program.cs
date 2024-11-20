@@ -9,9 +9,61 @@ namespace games
             This is the entry point of the program
             Includes base functionality for the games
          */
-        protected private int lives;
-        protected private int points = 0;
-        protected private bool quit = false;
+        // Class members  / Fields
+        protected private int _lives_;
+        protected private int _level_;
+        protected private int _points_;
+        protected private bool _quit_;
+
+
+        //  Properties @rules
+        protected private int Lives
+        {
+            get { return _lives_; } 
+            set 
+            { 
+                if (value > -1 )
+                {
+                    _lives_ = value;
+                }
+            }
+        }
+        protected private int Level
+        {
+            get { return _level_; }
+            set
+            {
+                if (value > -1)
+                {
+                    _level_ = value;
+                }
+            }
+        }
+
+        protected private int Points
+        { 
+            get { return _points_; }
+            set
+            {
+                if (value >= 0 && value < 2)
+                {
+                    _points_ = value;
+                }
+            }
+        
+        }
+
+        protected private bool Quit
+        {
+            get { return _quit_; }
+            set { 
+                    //  Ensure that the game should end
+                    if (_lives_ == 0 || value == true)
+                    { 
+                        _quit_ = value; 
+                    }
+                }
+        }
 
         protected private static void Main(string[] arg)
         {
@@ -21,7 +73,7 @@ namespace games
             Console.Write(@"Type in an Integer to select one of the following Games
     1 - Crocks game
     q - exit
-    s - Current Stats");
+    s - Current Stats ( while in a game)");
 
             var option = Console.ReadLine();
 
@@ -29,9 +81,9 @@ namespace games
             switch (Convert.ToInt32(option))
             {
                 case 1:
-                    Crocks crocks = new Crocks();
+                    Crocks @crocks = new Crocks();
                     Console.WriteLine("Starting Crocks game");
-                    crocks.Start();
+                    @crocks.Start();
                     break;
 
                 case 0:
@@ -42,23 +94,46 @@ namespace games
                     Console.WriteLine("Invalid option");
                     break;
             }
-            
-            @base.Stop();
 
             return;
         }
+        
+        protected private dynamic SetLives(dynamic lives)
+        {
+            _lives_ = lives;
+            return Lives;
+        }
+        protected private dynamic DecreaseLives()
+        {
+            _lives_--;
+
+            return 0;
+        }
+
+        protected private dynamic IncreaseLevel()
+        {
+            _level_ ++;
+            return _level_;
+        }
+
+        protected private dynamic IncreaseScore()
+        {
+            _points_ ++;
+            return 0;
+        }
+
+        
         protected private dynamic Stop()
         {
 
             //  End the game
-            if (lives == 0)
+            if (Lives == 0)
             {
-                Console.WriteLine("Game Over");
+                _quit_ = true;
+                Console.WriteLine($"\n[ @ ] The Game has ended Points achived : {Points}, Level Achived : {Level} [ @ ]\n");
             }
-            else if (quit == true)
-            {
-                Console.WriteLine("The Game is Over");
-            }
+
+            
             return 0;
         }
     }
@@ -67,18 +142,21 @@ namespace games
     {
         Random r = new Random();
 
-        public void Start()
+
+        internal dynamic Start()
         {
             //  Game Configrutations
-
-            //  Assigning the number of lives
-            lives = 3;
-
+            SetLives(3);
+            //  Assigning the number of _lives_
+            Console.WriteLine(_lives_);
             //  Randomizing the numbers
             Random r = new Random();
 
             //  Array of strings
-            string[] array = { ">", "=", "<" };
+            char[] array = new char[3]
+            { 
+                '>', '=', '<' 
+            };
 
 
 
@@ -90,51 +168,58 @@ The game will generate random integers then as a user you guessing if the number
 Initializing the game");
 
 
-            while (quit != true)
+            while (Quit != true)
             {
                 int num = r.Next(1, 100000);
                 int num1 = r.Next(1, 100000);
 
-                Console.WriteLine($" Is {num} Greater than, equal to or less than ? {num1}");
+                Console.WriteLine($"\n[ @ ] Is {num} Greater than, equal to or less than {num1}?\n");
+                var prompt = Convert.ToChar(value:Console.ReadLine());
 
-                var prompt = Console.ReadLine();
-
-                if (num == num1 && Convert.ToString(prompt) == array[1])
+                if (num == num1 && prompt.CompareTo(array[1]) == array[1] )
                 {
-                    Console.WriteLine("Congratulation you recieve +1 points");
-                    points++;
+                    Console.WriteLine("\n[ @ ] Congratulation you recieve +1 points\n");
+                    IncreaseScore();
                 }
-                else if (num > num1 && Convert.ToString(prompt) == array[0])
+                else if (num > num1 && prompt.CompareTo(array[0]) == array[0])
                 {
-                    Console.WriteLine("Congratulation you recieve +1 points");
-                    points++;
+                    Console.WriteLine("\n[ @ ] Congratulation you recieve +1 points\n");
+                    IncreaseScore();
                 }
-                else if (num < num1 && Convert.ToString(prompt) == array[2])
+                else if (num < num1 && prompt.CompareTo(array[2]) == array[2])
                 {
-                    Console.WriteLine("Congratulation you recieve +1 points");
-                    points++;
+                    Console.WriteLine("\n[ @ ] Congratulation you recieve +1 points [ @ ]\n");
+                    IncreaseScore();
                 }
-                else if(prompt == "s")
+                else if(prompt == 's')
                 {
-                    Console.WriteLine($"|-------------------------------|\n| You have {lives} lives left |\n| Points achived : {points} |");
+                    Console.WriteLine($"\n[ @ ] Stats :\nCurrent points : {Points}, Level Achived : {Level} [ @ ]\n");
                 }
-                else if (prompt == "q")
+                else if (prompt == 'q')
                 {
-                    quit = true;
-                    Console.WriteLine("Closing the game");
+                    
+                    SetLives(0);
+                    Stop();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("You have lost a life");
-                    lives--;
+                    Console.WriteLine("\n[ @ ] You have lost a life [ @ ]\n");
+                    DecreaseLives();
+                    Stop();
                 }
 
-                //  Check if the user has lost all the lives
-                Stop();
-
             }
-            return;
+            return 0;
+        }
+    }
+
+    internal class GuessTheNumber : Base
+    {
+        internal dynamic Start()
+        {
+
+            return 0;
         }
     }
 }
