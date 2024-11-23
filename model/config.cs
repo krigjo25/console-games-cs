@@ -41,7 +41,7 @@ namespace console_games_cs
                 }
             }
         }
-        
+
         protected int Lives
         {
             get => __lives__;
@@ -53,7 +53,7 @@ namespace console_games_cs
                 }
             }
         }
-        
+
         internal int Level
         {
             get => __level__;
@@ -79,7 +79,7 @@ namespace console_games_cs
 
         }
 
-       public int compareScore
+        public int compareScore
         {
             get => __compareScore__;
             set
@@ -137,9 +137,9 @@ namespace console_games_cs
                 "Eskil", "Erlend", "Linda"
             };
 
-            Random @r = new Random();
+            Model @model = new Model();
 
-            return array[r.Next(0, array.Length-1)];
+            return array[@model.RandomNumber(array.Length - 1)];
         }
 
         protected dynamic SetLives(int lives)
@@ -158,11 +158,13 @@ namespace console_games_cs
 
         protected dynamic IncreaseLevel()
         {
+            const int n = 100;
+            // Up to date -> level = n * Math.Sqrt(Points)
             //  Ensure the user has achived the required score to level up
-            if (Points == (compareScore * Level)+3)
+            if (Points == (compareScore * Level) + 3)
             {
-                Level ++;
-                Lives ++;
+                Level++;
+                Lives++;
                 compareScore += 4;
 
                 //  Level up message
@@ -172,7 +174,7 @@ namespace console_games_cs
                 return 0;
             }
 
-            Points ++;
+            Points++;
             return 0;
         }
 
@@ -201,16 +203,34 @@ namespace console_games_cs
             }
             return false;
         }
+        
+        internal dynamic FindN()
+        {
+            int n = Level * Points;
+            Model @model = new Model();
+
+            // Up to date
+            // Algorithm to determine the difficulty level based on the current level
+            if (Level < 10)
+            {
+                return n + 10; // Easy
+            }
+            else
+            {
+                return n;
+            }
+        }
     }
 
-    internal class Model : Config
+    internal class Model
     {
-        public dynamic RandomNumber(int level)
+        public dynamic RandomNumber(int arg)
         {
             Random r = new Random();
-            return r.Next(0, level * 10);
+            return r.Next(0, arg);
         }
 
 
     }
+
 }

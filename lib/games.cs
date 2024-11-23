@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -39,9 +40,10 @@ Initalizing the game...");
 
             while (true)
             {
+                int n = FindN();
                 int[] ran_num = new int[2]
                 {
-                    model.RandomNumber(Level), model.RandomNumber(Level)
+                    model.RandomNumber(n), model.RandomNumber(n)
                 };
 
 
@@ -51,7 +53,7 @@ Initalizing the game...");
                 var key = Console.ReadKey().KeyChar;
 
                 //  Ensure that the user input is correct
-                if (ran_num[0] == ran_num[1] && key == array[0] )
+                if (ran_num[0] == ran_num[1] && key == array[0])
                 {
                     Console.WriteLine("\n[ @ ] Congratulation you recieve +1 points\n");
                     IncreaseLevel();
@@ -121,3 +123,4 @@ Initalizing the game...");
             return "Thanks for Playing !";
         }
     }
+}
