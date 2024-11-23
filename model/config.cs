@@ -20,9 +20,10 @@ namespace console_games_cs
         private int __level__;
         private int __points__;
         private bool __quit__;
+        private int __totalScore__;
         private string __botName__ = "";
         private string __gName__ = "";
-        private int __compareScore__;
+        private int __compareScore__ = (int) Math.Round(0.0f * (float)Math.Sqrt(0) + 3);
 
 
         //  Properties @rules
@@ -66,6 +67,18 @@ namespace console_games_cs
             }
         }
 
+        private int totalScore
+        {
+            get => __totalScore__;
+            set
+            {
+                if (value >= 0)
+                {
+                    __totalScore__ = value;
+                }
+            }
+        }
+
         internal int Points
         {
             get => __points__;
@@ -84,7 +97,7 @@ namespace console_games_cs
             get => __compareScore__;
             set
             {
-                if (Points == __compareScore__ + 3)
+                if (value > 0 )
                 {
                     __compareScore__ = value;
                 }
@@ -158,22 +171,27 @@ namespace console_games_cs
 
         protected dynamic IncreaseLevel()
         {
-            const int n = 100;
+            
+            
             // Up to date -> level = n * Math.Sqrt(Points)
             //  Ensure the user has achived the required score to level up
-            if (Points == (compareScore * Level) + 3)
+            if (Points >= compareScore)
             {
+                float n = 7.0f;
+
                 Level++;
                 Lives++;
-                compareScore += 4;
+
+               //https://gamedev.stackexchange.com/questions/13638/algorithm-for-dynamically-calculating-a-level-based-on-experience-points
+               compareScore = (int)Math.Round(n *(float)Math.Sqrt(totalScore));
 
                 //  Level up message
-                Console.WriteLine($"Congratulation ! You just level'ed up !");
-                Console.WriteLine($"Score : {Points}, Level : {Level}, Lives : {Lives}, Compare : {compareScore * Level}");
+                Model.ConsoleTypeEffect($"Congratulation ! You just level'ed up !");
+                Model.ConsoleTypeEffect($"Score : {Points}, Level : {Level}, Lives : {Lives}, Points untill next lvl  : {compareScore}");
 
                 return 0;
             }
-
+            totalScore++;
             Points++;
             return 0;
         }
@@ -197,17 +215,20 @@ namespace console_games_cs
             //  End the game
             if (Lives == 0)
             {
-                Console.WriteLine($"\n[ @ ] The Game has ended Points achived : {points}, Level Achived : {level} [ @ ]\n");
+                Console.WriteLine($"\n[ @ ] The Game has ended total Scores achived : {totalScore}, Level Achived : {level} [ @ ]\n");
                 Quit = true;
                 return true;
             }
             return false;
         }
         
+        protected virtual void GreetUser()
+        {
+
+        }
         internal dynamic FindN()
         {
             int n = Level * Points;
-            Model @model = new Model();
 
             // Up to date
             // Algorithm to determine the difficulty level based on the current level
@@ -224,6 +245,17 @@ namespace console_games_cs
 
     internal class Model
     {
+        public static void ConsoleTypeEffect(string text)
+        {
+            //  Console type effect
+            foreach (char c in text)
+            {
+                Console.Write(c);
+                Thread.Sleep(75);
+            }
+            Console.WriteLine("");
+
+        }
         public dynamic RandomNumber(int arg)
         {
             Random r = new Random();

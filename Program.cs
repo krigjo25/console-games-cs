@@ -19,17 +19,17 @@ namespace console_games_cs
                 "exit","Crocks Game", "Guess the number",
             };
 
-            Console.WriteLine(@$"Type in an Integer to select one of the following Games
-    2 - Guess the number
-    1 - Crocks game
-    0 - exit
-    s - Current Stats ( while in a game)");
-        
+            Model.ConsoleTypeEffect("Type in an Integer to select one of the following Games.");
+            Model.ConsoleTypeEffect("2 - Guess the number");
+            Model.ConsoleTypeEffect("1 - Crocks game");
+            Model.ConsoleTypeEffect("0 - exit");
+            Model.ConsoleTypeEffect("s - Current Stats ( while in a game)");
+            Model.ConsoleTypeEffect("q - Quit the game");
             //  Ensure that input is an integer
             if (!Int32.TryParse(Console.ReadLine(), out int option))
             {
-                Console.WriteLine("Provide only integers !");
-                Console.WriteLine("System exit Not an INT !");
+                Model.ConsoleTypeEffect("Provide only integers !");
+                Model.ConsoleTypeEffect("System exit Not an INT !");
                 Thread.Sleep(5000);
             }
 
@@ -38,13 +38,14 @@ namespace console_games_cs
                 case 2:
                     config.Gname = array[option];
                     GuessTheNumber @gtn = new GuessTheNumber();
+                    Console.Clear();
                     @gtn.Start();
                     break;
 
                 case 1:
                     config.Gname = array[option];
                     Crocks @crocks = new Crocks();
-                    Console.WriteLine("Starting Crocks game");
+                    Console.Clear();
                     @crocks.Start();
                     break;
 
