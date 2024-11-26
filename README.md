@@ -3,7 +3,8 @@
 ## Overview
 `console-games-cs` is a collection of simple console-based games written in C#.
 The project is designed to demonstrate basic game development concepts and provide a fun way to practice C# programming.
-Created by [Krigjo](), this project is open-source and free to use. Its created during an assigmnet in the subject 3, course "Start-IT - C#" at the Vocational College Get Academy in Larvik, Norway.
+Created by [Krigjo](), this project is open-source and free to use. 
+Its created during an assigmnet in the subject 3, course "Start-IT - C#" at the Vocational College Get Academy in Larvik, Norway.
 
 ## Games Included
 1. **Crocks Game**: A game where the player guesses if one number is greater than, equal to, or less than another number.
@@ -42,11 +43,11 @@ Created by [Krigjo](), this project is open-source and free to use. Its created 
 - If you guess correctly, you gain a point and the difficulty increases.
 - If you guess incorrectly, you lose a life.
 
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+Based on level the difficulty may vary, but the user gets a hint if the user types in a less or greater than answer.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the No License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
+
 For any questions or suggestions, please open an issue or contact the me at [e-mail](mailto:krigjo25@outlook.com).

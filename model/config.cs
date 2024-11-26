@@ -67,7 +67,8 @@ namespace console_games_cs
             }
         }
 
-        private int totalScore
+        private
+            int totalScore
         {
             get => __totalScore__;
             set

@@ -86,37 +86,37 @@ If you guess incorrectly you will loose a life.");
                 Model.ConsoleTypeEffect($"[ @ ] Is {ran_num[0]} Greater than, equal to or less than {ran_num[1]}?[ @ ]");
 
                 // User input
-                var key = Console.ReadKey().KeyChar;
+                var key = Console.ReadKey();
 
                 //  Ensure that the user input is correct
-                if (ran_num[0] == ran_num[1] && key == array[0])
+                if (ran_num[0] == ran_num[1] && key.KeyChar == array[0])
                 {
                     Console.Clear();
                     Model.ConsoleTypeEffect("[ @ ] Congratulation you recieve 1 point [ @ ]");
                     IncreaseLevel();
                     Thread.Sleep(ms);
                 }
-                else if (ran_num[0] > ran_num[1] && key == array[1])
+                else if (ran_num[0] > ran_num[1] && key.KeyChar == array[1])
                 {
                     Console.Clear();
                     Model.ConsoleTypeEffect("[ @ ] Congratulation you recieve 1 point [ @ ]");
                     IncreaseLevel();
                     Thread.Sleep(ms);
                 }
-                else if (ran_num[0] < ran_num[1] && key == array[2])
+                else if (ran_num[0] < ran_num[1] && key.KeyChar == array[2])
                 {
                     Console.Clear();
                     Model.ConsoleTypeEffect("[ @ ] Congratulation you recieve 1 point [ @ ]");
                     IncreaseLevel();
                     Thread.Sleep(ms);
                 }
-                else if (key == array[3])
+                else if (key.Key ==ConsoleKey.S)
                 {
                     Console.Clear();
                     Model.ConsoleTypeEffect($"[ @ ] Stats :\nCurrent points : {Points}/{compareScore}, Level Achived : {Level} Lives left : {Lives} [ @ ]");
                     Thread.Sleep(ms);
                 }
-                else if (key == array[4])
+                else if (key.Key == ConsoleKey.Q || key.Key == ConsoleKey.Escape)
                 {
                     SetLives(0);
                 }
