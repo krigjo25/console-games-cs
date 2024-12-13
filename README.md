@@ -3,8 +3,11 @@
 ## Overview
 `console-games-cs` is a collection of simple console-based games written in C#.
 The project is designed to demonstrate basic game development concepts and provide a fun way to practice C# programming.
-Created by [Krigjo](), this project is open-source and free to use. 
-Its created during an assigmnet in the subject 3, course "Start-IT - C#" at the Vocational College Get Academy in Larvik, Norway.
+
+The project was created as an assignment for [Get Academy](https://getacademy.no)<br>
+Please respect and keep
+the [Academic Honesty Integerty](https://ctl.columbia.edu/resources-and-technology/resources/academic-integrity/) in
+mind.<br>
 
 ## Games Included
 1. **Crocks Game**: A game where the player guesses if one number is greater than, equal to, or less than another number.
@@ -17,12 +20,43 @@ Its created during an assigmnet in the subject 3, course "Start-IT - C#" at the 
 - Easy to extend with new games.
 
 ## Requirements
-- .NET 8 SDK -> [Download](https://dotnet.microsoft.com/download/dotnet/5.0)
+- Visual Studio 2019 > / Rider 2020.3 >
+- .NET Core 8.0
 
-### Build and Run
-1. Open the project in Visual Studio.
-2. Build the solution.
-3. Run the project.
+## Installation
+1. Clone the repository
+2. ```shell script
+   git clone https://github.com/krigjo25/Console-StudentManagementSystem-cs
+   ```
+3. Open the project in Visual Studio
+4. Run the project
+5. Done!
+
+### Example
+```sh
+prompt :
+Press an Integer to select one of the following Games.
+1. Crocks Game
+2. Guess The Number
+s. Shows current stats (inside a game )
+0, ESC, q  to quit the game
+
+input : 1
+// Initializing the Crocks Game
+
+input : s
+// Initializing the current stats
+
+input : 2
+// Initializing Guess The Game
+
+input : s
+// Initializing the current stats
+
+input : esc (q)
+// Exits the game with an exit status of 0
+
+```
 
 ### Playing the Games
 - Follow the on-screen instructions to play each game.
@@ -46,8 +80,9 @@ Its created during an assigmnet in the subject 3, course "Start-IT - C#" at the 
 Based on level the difficulty may vary, but the user gets a hint if the user types in a less or greater than answer.
 
 ## License
-This project is licensed under the No License. See the [LICENSE](LICENSE) file for details.
+This application is under [GNU v.3](./LICENCE)
 
-## Contact
-
-For any questions or suggestions, please open an issue or contact the me at [e-mail](mailto:krigjo25@outlook.com).
+## Notes from the developer
+Created with love for programming, thanks for reading.
+I hope you'll have a beautiful day as you are!,<br>
+@krigjo25
